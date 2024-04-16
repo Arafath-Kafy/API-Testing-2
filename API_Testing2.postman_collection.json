@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "8d3679dd-3efe-42c2-a58c-e3cf9cc4a9ec",
+		"name": "API_Testing2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33652991"
+	},
+	"item": [
+		{
+			"name": "status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/status",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book_list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book_details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books/6",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jdata = pm.response.json()\r",
+							"pm.environment.set(\"OrderID\",jdata.orderId)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "50a2973bec087e3111909b5cba4c8a7111c20d60470eabf080ec1321a5114804",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token={{AccessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookId\": 3,\r\n    \"customerName\": \"Arafath\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/orders",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "50a2973bec087e3111909b5cba4c8a7111c20d60470eabf080ec1321a5114804",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token={{AccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/orders/{{OrderID}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"orders",
+						"{{OrderID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "50a2973bec087e3111909b5cba4c8a7111c20d60470eabf080ec1321a5114804",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookId\": 1,\r\n    \"customerName\": \"Arafat\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/orders/{{OrderID}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"orders",
+						"{{OrderID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jdata = pm.response.json()\r",
+							"pm.environment.set(\"AccessToken\",jdata.accessToken)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientName\": \"Arafath Kafy\",\r\n    \"clientEmail\": \"arafathkafy28@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api-clients/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api-clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "50a2973bec087e3111909b5cba4c8a7111c20d60470eabf080ec1321a5114804",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/orders",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "50a2973bec087e3111909b5cba4c8a7111c20d60470eabf080ec1321a5114804",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/orders/{{OrderID}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"orders",
+						"{{OrderID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
